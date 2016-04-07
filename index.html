@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Adleria API Docs</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="shell">curl</a>
+              <a href="#" data-language-name="javascript">Node</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,7 +111,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='www.adleria.com/networks'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -121,59 +120,87 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Adleria API!</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>All request return promises.</p>
 
 <h1 id="authentication">Authentication</h1>
 
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>To authorize, use adleria user and password provided as http authentication</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<pre class="highlight plaintext"><code>
 </code></pre>
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>Adleria uses http basic authorization. User and password should be provided by adleria.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+          <h1 id="customers">Customers</h1>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+<h2 id="create-customer">Create Customer</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"http://adleria.com/api/v1/customers"</span>
+  -u myusername:mypassword
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">create</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://adleria.com/api/v1/customers</code></p>
+
+<h3 id="body-parameters">Body Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company.VAT</td>
+<td>Vat number.</td>
+</tr>
+<tr>
+<td>company.email</td>
+<td>Company email.</td>
+</tr>
+<tr>
+<td>company.address.street</td>
+<td>Company street.</td>
+</tr>
+<tr>
+<td>company.address.city</td>
+<td>Company City.</td>
+</tr>
+<tr>
+<td>company.address.ZIP</td>
+<td>Postal code.</td>
+</tr>
+<tr>
+<td>company.address.country</td>
+<td>Company country.</td>
+</tr>
+<tr>
+<td>payoutInfo.IBAN</td>
+<td>IBAN number</td>
+</tr>
+<tr>
+<td>payoutInfo.BIC</td>
+<td>BIC Number</td>
+</tr>
+</tbody></table>
+
+<h2 id="list-customers">List Customers</h2>
+<pre class="highlight shell"><code>
+curl <span class="s2">"http://adleria.com/api/v1/customers"</span>
+  -u myusername:mypassword
+</code></pre>
+<pre class="highlight javascript"><code>
+<span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">list</span><span class="p">()</span>
+
 </code></pre>
 
 <blockquote>
@@ -181,101 +208,391 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </blockquote>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5673c3e029c704897b13e2fe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"networkId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56695ea196a00b1a5ecf2ee8"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payoutInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BIC"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"IBAN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spain"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ZIP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"28703"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Madrid"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jorge Juan 2"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@email.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"VAT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<p><code class="prettyprint">GET http://adleria.com/api/v1/customers</code></p>
 
-<h3 id="http-request">HTTP Request</h3>
+          <h1 id="adspaces">Adspaces</h1>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<h2 id="create-adspaces">Create Adspaces</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"http://adleria.com/api/v1/adspaces"</span>
+  -u myusername:mypassword
+  -d customerId:1234
+  -d name:adspaceName
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">adspaces</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'adspace name'</span><span class="p">,</span>
+  <span class="na">customerId</span><span class="p">:</span> <span class="s1">'customerid'</span>
+<span class="p">})</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"networkId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56695ea196a00b1a5ecf2ee8"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5673c3e029c704897b13e2fe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56cdda87946181c38d1116df"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"review"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"reviewDate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"openHours"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"openTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"restricted"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"netto"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"players"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"fixed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"video/audio"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"creationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-24T16:29:44.249Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ZIP"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">POST http://adleria.com/api/v1/adspaces</code></p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<h3 id="body-parameters">Body Parameters</h3>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Param</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>customerId <em>required</em></td>
+<td>Customer id of the adspace owner</td>
+</tr>
+<tr>
+<td>name <em>optional</em></td>
+<td>Name of the adspace, between 3 and 50 characters.</td>
+</tr>
+<tr>
+<td>description <em>optional</em></td>
+<td>Description of the adspace. Maximum 250 characters.</td>
+</tr>
+<tr>
+<td>location.city <em>optional</em></td>
+<td>City of the adspace.</td>
+</tr>
+<tr>
+<td>location.country <em>optional</em></td>
+<td>Country of the adspace.</td>
+</tr>
+<tr>
+<td>location.street <em>optional</em></td>
+<td>Street of the adspace.</td>
+</tr>
+<tr>
+<td>location.lat <em>optional</em></td>
+<td>Number with adspace latitude.</td>
+</tr>
+<tr>
+<td>location.lng <em>optional</em></td>
+<td>Number with adspace longitude.</td>
+</tr>
+<tr>
+<td>type <em>optional</em></td>
+<td>Type of adspace content. &ldquo;video&rdquo;, &ldquo;video/audio&rdquo; or &ldquo;audio&rdquo;. Defaults to &ldquo;video/audio&rdquo;.</td>
+</tr>
+<tr>
+<td>targets <em>optional</em></td>
+<td>Array with target ids. See Tags to get targets information.</td>
+</tr>
+<tr>
+<td>estimatedMonthlyVisitors <em>optional</em></td>
+<td>Number with estimated monthly adspace visitors.</td>
+</tr>
+<tr>
+<td>price.netto <em>optional</em></td>
+<td>Price per add in the adspace in cents.</td>
+</tr>
+<tr>
+<td>openHours.openTime <em>optional</em></td>
+<td>String with adspace openning hour. Defaults to &ldquo;9:00&rdquo;</td>
+</tr>
+<tr>
+<td>openHours.closeTime <em>optional</em></td>
+<td>String with adspace closing hour. Defaults to &ldquo;9:00&rdquo;</td>
+</tr>
+<tr>
+<td>images <em>optional</em></td>
+<td>Array with a list of images. Images has this properties {src: &ldquo;&rdquo;, title: &ldquo;&rdquo;, previewUrl: &ldquo;&rdquo;, thumbnail:&ldquo;&rdquo;}</td>
 </tr>
 </tbody></table>
+
+<h2 id="list-adspaces">List Adspaces</h2>
+<pre class="highlight shell"><code>
+curl <span class="s2">"http://adleria.com/api/v1/adspaces"</span>
+  -u myusername:mypassword
+</code></pre>
+<pre class="highlight javascript"><code>
+<span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">adspaces</span><span class="p">.</span><span class="nx">list</span><span class="p">()</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"docs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56ab710f282fc95a566b25cf"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"holasfdsf"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56ab6f3bda834faa54ba4bfc"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"networkId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56695ea196a00b1a5ecf2ee8"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"review"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"reviewDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-16T09:20:46.156Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"approved"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"openHours"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"openTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"restricted"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"netto"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"players"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"56695e59b8cc27d35dcb0627"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"56695e59b8cc27d35dcb062c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"56695e59b8cc27d35dcb0629"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"fixed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"video/audio"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"creationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-29T14:02:33.501Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ZIP"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"holasfdsf"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Retrieve a list with all adspaces. Optionaly a customer can be set to get only that customer adspaces.</p>
+
+<h3 id="query-parameters">Query parameters</h3>
+
+<table><thead>
+<tr>
+<th>Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customerId <em>optional</em></td>
+<td>Get only adspaces for this customer</td>
+</tr>
+<tr>
+<td>limit <em>optional</em></td>
+<td>Limit of adspaces to retrieve. Default 10.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-adspace">Get Adspace</h2>
+<pre class="highlight shell"><code>
+curl <span class="s2">"http://adleria.com/api/v1/adspaces/{adspaceId}"</span> <span class="se">\</span>
+  -u myusername:mypassword 
+</code></pre>
+<pre class="highlight javascript"><code>
+<span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">adspaces</span><span class="p">.</span><span class="nx">get</span><span class="p">({</span><span class="nx">adspaceId</span><span class="p">});</span>
+
+</code></pre>
+
+<p>Get Adspace details.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://adleria.com/api/v1/adspaces/{adspaceId}</code></p>
+
+<h2 id="edit-adspace">Edit Adspace</h2>
+<pre class="highlight shell"><code>
+curl <span class="s2">"http://adleria.com/api/v1/adspaces/adspaceId"</span> <span class="se">\</span>
+  -u myusername:mypassword <span class="se">\</span>
+  -d <span class="o">{</span>param:value<span class="o">}</span>
+</code></pre>
+<pre class="highlight javascript"><code>
+<span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">adspaces</span><span class="p">.</span><span class="nx">edit</span><span class="p">({</span><span class="nx">adspaceId</span><span class="p">},</span> <span class="p">{</span><span class="nx">args</span><span class="p">});</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56ab710f282fc95a566b25cf"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"holasfdsf"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56ab6f3bda834faa54ba4bfc"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"networkId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56695ea196a00b1a5ecf2ee8"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"review"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"reviewDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-16T09:20:46.156Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approved"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"openHours"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"openTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"restricted"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"netto"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"players"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"fixed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"video/audio"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"creationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-29T14:02:33.501Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ZIP"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"holasfdsf"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>Edit adspace and returns the edited adspace.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT http://adleria.com/api/v1/adspaces/{adspaceId}</code></p>
+
+          <h1 id="tags">Tags</h1>
+
+<h2 id="list-tags">List Tags</h2>
+
+<p>List all available tags to be used in adspaces.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"http://adleria.com/api/v1/tags"</span>
+  -u myusername:mypassword
+</code></pre>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">tags</span><span class="p">.</span><span class="nx">list</span><span class="p">()</span>
+</code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://adleria.com/api/v1/tags</code></p>
+
+          
+          <h1 id="payout-orders">Payout Orders</h1>
+
+<p>Payout orders are reverse invoice with payments made from adleria to customers and networks.</p>
+
+<h2 id="list-payout-orders">List Payout Orders</h2>
+
+<p>Retrieve a list with payout orders. Optionaly a customer can be set to get only that customer adspaces.</p>
+
+<h3 id="query-parameters">Query parameters</h3>
+
+<table><thead>
+<tr>
+<th>Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customerId <em>optional</em></td>
+<td>Get only adspaces for this customer</td>
+</tr>
+<tr>
+<td>limit <em>optional</em></td>
+<td>Limit of adspaces to retrieve. Default 10.</td>
+</tr>
+</tbody></table>
+<pre class="highlight shell"><code>curl <span class="s2">"http://adleria.com/api/v1/payout-orders"</span>
+  -u myusername:mypassword
+</code></pre>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">payoutOrders</span><span class="p">.</span><span class="nx">list</span><span class="p">()</span>
+</code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://adleria.com/api/v1/payout-orders</code></p>
+
+<h2 id="get-payout-order">Get Payout Order</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"http://adleria.com/api/v1/payout-orders/{payoutOrderId}"</span>
+  -u myusername:mypassword
+</code></pre>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adleria</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adleria'</span><span class="p">)(</span><span class="s1">'networkId'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">);</span>
+<span class="nx">adleria</span><span class="p">.</span><span class="nx">payoutOrders</span><span class="p">.</span><span class="nx">get</span><span class="p">({</span><span class="nx">payoutorderId</span><span class="p">})</span>
+</code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://adleria.com/api/v1/payout-orders/{payoutOrderId}</code></p>
 
           <h1 id="errors">Errors</h1>
 
@@ -338,9 +655,8 @@ Remember — a happy kitten is an authenticated kitten!
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="shell">curl</a>
+                <a href="#" data-language-name="javascript">Node</a>
           </div>
       </div>
     </div>
